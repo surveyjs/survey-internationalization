@@ -7,8 +7,8 @@ import $ from "jquery";
 import * as Survey from "survey-react";
 import SurveyCreator from "./SurveyCreator";
 import * as widgets from "surveyjs-widgets";
-Survey.StylesManager.applyTheme("default");
 window["$"] = window["jQuery"] = $;
+Survey.StylesManager.applyTheme("default");
 widgets.inputmask(Survey);
 widgets.jqueryuidatepicker(Survey, $);
 
@@ -35,7 +35,7 @@ class App extends Component {
     ]
   };
   onComplete(result) {
-    console.log("Complete! " + result);
+    console.log(result);
   }
   render() {
     var model = new Survey.Model(this.json);
