@@ -8,7 +8,7 @@ export var ruRU_culture = {
     longDateFormats: [
         { text: "12 Апреля 1961", value: "" }
     ],
-    name: "Russian (Russia)",
+    name: "Русский (Россия)",
     shortDateFormats: [
         { text: "12.04.1961", value: "dd.mm.yy" }
     ],

@@ -24,7 +24,7 @@ export var cultureInfo = {
     return this.cultures[actualCultureName];
   },
   getCultures: function() {
-    var res = [""];
+    var res = [];
     if (this.supportedCultures && this.supportedCultures.length > 0) {
       for (var i = 0; i < this.supportedCultures.length; i++) {
         res.push(this.supportedCultures[i]);
