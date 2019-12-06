@@ -1,32 +1,30 @@
-import { englishCulture } from "./culture/english";
+import { enUS_culture } from "./en-US";
 
 export var cultureInfo = {
   currentCultureValue: "",
-  defaultCultureValue: "en",
-  cultures: <{[index: string]: any}>{},
-  cultureNames: <{[index: string]: any}>{},
-  supportedCultures: <Array<any>>[],
+  defaultCultureValue: "en-US",
+  cultures: [],
+  supportedCultures: [],
   get currentCulture() {
     return this.currentCultureValue === this.defaultCultureValue
       ? ""
       : this.currentCultureValue;
   },
-  set currentCulture(val: string) {
+  set currentCulture(val) {
     this.currentCultureValue = val;
   },
   get defaultCulture() {
     return this.defaultCultureValue;
   },
-  set defaultCulture(val: string) {
+  set defaultCulture(val) {
     this.defaultLocaleValue = val;
   },
-  getCulture: function (cultureName: string = "") {
+  getCulture: function (cultureName = "") {
     let actualCultureName = cultureName || this.currentCultureValue || this.defaultCultureValue;
     return this.cultures[actualCultureName];
   },
-  getCultures: function(): Array<string> {
-    var res = [];
-    res.push("");
+  getCultures: function() {
+    var res = [""];
     if (this.supportedCultures && this.supportedCultures.length > 0) {
       for (var i = 0; i < this.supportedCultures.length; i++) {
         res.push(this.supportedCultures[i]);
@@ -41,6 +39,4 @@ export var cultureInfo = {
   }
 };
 
-export var surveyCulture = englishCulture;
-(<any>cultureInfo).cultures["en"] = englishCulture;
-(<any>cultureInfo).cultureNames["en"] = "english";
+cultureInfo.cultures["en-US"] = enUS_culture;

@@ -4,13 +4,19 @@ import "survey-react/survey.css";
 import "./App.css";
 
 import $ from "jquery";
+import "jquery-ui/ui/widgets/datepicker.js";
+import "jquery-ui/themes/base/all.css";
 import * as Survey from "survey-react";
+import * as SurveyKo from "survey-knockout";
 import SurveyCreator from "./SurveyCreator";
 import * as widgets from "surveyjs-widgets";
+import { initCulture } from "./culture/cultureInit";
 window["$"] = window["jQuery"] = $;
 Survey.StylesManager.applyTheme("default");
 widgets.inputmask(Survey);
 widgets.jqueryuidatepicker(Survey, $);
+initCulture(Survey);
+initCulture(SurveyKo);
 
 class App extends Component {
   json = {
@@ -31,6 +37,10 @@ class App extends Component {
         type: "text",
         name: "text_currency_mask",
         inputMask: "currency"
+      },
+      {
+        type: "datepicker",
+        name: "datepicker_shortdate"
       }
     ]
   };
