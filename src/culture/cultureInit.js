@@ -7,7 +7,7 @@ export function initCulture(Survey) {
     function getQuestionCulture(question) {
         return question.getPropertyValue("culture",
             // eslint-disable-next-line
-            question.survey && question.survey.culture || ""); 
+            question.survey && question.survey.culture || null); 
     }
     // function getCultureProperty(question, propertyName) {
     //     return question.getPropertyValue(propertyName,
@@ -18,30 +18,21 @@ export function initCulture(Survey) {
     Survey.Serializer.addProperty("survey", {
         name: "culture",
         choices: function(obj) {
-            return [""].concat(Survey.cultureInfo.getCultures())
+            return [null].concat(Survey.cultureInfo.getCultures())
                 .map((value) => {
                     return {
                         text: (value ? "" : "Default: ") +
-                            Survey.cultureInfo.getCulture(value).name,
+                            Survey.cultureInfo.getCulture(value || "").name,
                         value: value
                     }
                 });
-            //     };
-            
-            
-            // [
-            //     {
-            //         text: "Default: " + Survey.cultureInfo.getCulture().name,
-            //         value: ""
-            //     }
-            // ].concat(Survey.cultureInfo.getCultures());
         },
-        default: ""
+        default: null
     });
     Survey.Serializer.addProperty("text", {
         name: "culture",
         choices: function(obj) {
-            return [""].concat(Survey.cultureInfo.getCultures())
+            return [null].concat(Survey.cultureInfo.getCultures())
                 .map((value) => {
                     return {
                         text: (value ? "" : "Default: ") +
@@ -54,30 +45,34 @@ export function initCulture(Survey) {
                     };
                 });
         },
-        default: ""
+        default: null
+    });
+    Survey.Serializer.addProperty("text", {
+        name: "dateSeparator",
+        dependsOn: "culture",
+        choices: function(obj) {
+            var separators = Survey.cultureInfo.getCulture(
+                getQuestionCulture(obj) || "").dateSeparators;
+            var defaultSeparator = {
+                text: "Default: " + separators[0],
+                value: null
+            };
+            return [defaultSeparator].concat(separators);
+        },
+        default: null
     });
     Survey.Serializer.addProperty("text", {
         name: "shortDateFormat",
-        dependsOn: "culture",
+        dependsOn: ["culture", "dateSeparator"],
         choices: function(obj) {
             var formats = Survey.cultureInfo.getCulture(
-                getQuestionCulture(obj)).shortDateFormats;
+                getQuestionCulture(obj) || "").shortDateFormats;
             var defaultFormat = {
                 text: "Default: " + formats[0].text,
-                value: ""        
-            }
+                value: null
+            };
             return [defaultFormat].concat(formats);
-            //     return [{
-            //     text: "Default: " + getCultureProperty(obj, "shortDateFormat"),
-            //     value: ""
-            // }].concat(Survey.cultureInfo
-            //     .getCulture(getQuestionCulture(obj)).shortDateFormats);
         },
-        // onGetValue: function(obj) {
-        //     return obj.getPropertyValue("shortDateFormat",
-        //         Survey.cultureInfo.getCulture(
-        //             getQuestionCulture(obj)).shortDateFormats[0].value); 
-        // },
-        default: ""
+        default: null
     });
 };
