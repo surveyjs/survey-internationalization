@@ -1,13 +1,13 @@
 import { enUS_culture } from "./en-US";
 
 export var cultureInfo = {
-  currentCultureValue: "",
+  currentCultureValue: null,
   defaultCultureValue: "en-US",
   cultures: [],
   supportedCultures: [],
   get currentCulture() {
     return this.currentCultureValue === this.defaultCultureValue
-      ? ""
+      ? null
       : this.currentCultureValue;
   },
   set currentCulture(val) {
@@ -19,7 +19,7 @@ export var cultureInfo = {
   set defaultCulture(val) {
     this.defaultLocaleValue = val;
   },
-  getCulture: function (cultureName = "") {
+  getCulture: function(cultureName = null) {
     let actualCultureName = cultureName || this.currentCultureValue || this.defaultCultureValue;
     return this.cultures[actualCultureName];
   },
@@ -36,6 +36,27 @@ export var cultureInfo = {
     }
     res.sort();
     return res;
+  },
+  getSurveyCulture: function(survey) {
+    return survey.getPropertyValue("culture",
+      this.currentCultureValue || this.defaultCultureValue);
+  },
+  getQuestionCulture: function(question) {
+    return question.getPropertyValue("culture",
+      question.survey && this.getSurveyCulture(question.survey) ||
+      this.currentCultureValue || this.defaultCultureValue);
+  },
+  getQuestionDateSeparator: function(question) {
+    return question.getPropertyValue("dateSeparator",
+      this.getCulture(this.getQuestionCulture(question))
+        .dateSeparators[0]);
+  },
+  getQuestionShortDateFormat: function(question) {
+    var separator = this.getQuestionDateSeparator(question);
+    var format = question.getPropertyValue("shortDateFormat",
+      this.getCulture(this.getQuestionCulture(question))
+       .shortDateFormats[0].value);
+    return format.replace(/\W/g, separator);
   }
 };
 
