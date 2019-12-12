@@ -1,8 +1,18 @@
-import { USD } from "./currency/USD";
-
 export var enUS_culture = {
-    currency: USD,
+    currencyAlpha: "USD",
+    currencyFormats: [
+        { value: null }
+    ],
+    currencyName: "US Dollar",
+    currencySignAfterSymbol: false,
+    currencySignLocation: "left",
+    currencySymbol: "$",
+    currencySymbolLocation: "left",
+    currencyUseParentheses: false,
     dateSeparators: ["/", "-"],
+    decimalSeparators: ["."],
+    digitsAfterDecimal: 2,
+    digitGroupingSymbols: [","],
     locale: "en",
     longDateFormats: [
         { text: "April 12, 1961", value: "" },

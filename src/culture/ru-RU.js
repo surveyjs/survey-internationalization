@@ -1,9 +1,20 @@
 import { cultureInfo } from "./cultureInfo";
-import { RUB } from "./currency/RUB";
 
 export var ruRU_culture = {
-    currency: RUB,
+    currencyAlpha: "RUB",
+    currencyFormats: [
+        { value: null }
+    ],
+    currencyName: "Российский рубль",
+    currencySignAfterSymbol: false,
+    currencySignLocation: "left",
+    currencySymbol: "₽",
+    currencySymbolLocation: "right",
+    currencyUseParentheses: false,
     dateSeparators: ["."],
+    decimalSeparators: [",", "."],
+    digitsAfterDecimal: 2,
+    digitGroupingSymbols: [" ", "."],
     locale: "ru",
     longDateFormats: [
         { text: "12 Апреля 1961", value: "" }
