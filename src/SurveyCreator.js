@@ -3,11 +3,12 @@ import * as SurveyJSCreator from "survey-creator";
 import * as SurveyKo from "survey-knockout";
 import "survey-creator/survey-creator.css";
 import $ from "jquery";
-import * as widgets from "surveyjs-widgets";
+import { init as inputmask } from "./widgets/inputmask";
+import { init as jqueryuidatepicker } from "./widgets/jquery-ui-datepicker";
 
 SurveyJSCreator.StylesManager.applyTheme("default");
-widgets.inputmask(SurveyKo);
-widgets.jqueryuidatepicker(SurveyKo, $);
+inputmask(SurveyKo);
+jqueryuidatepicker(SurveyKo, $);
 
 class SurveyCreator extends Component {
     surveyCreator;

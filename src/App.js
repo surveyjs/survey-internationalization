@@ -9,12 +9,13 @@ import "jquery-ui/themes/base/all.css";
 import * as Survey from "survey-react";
 import * as SurveyKo from "survey-knockout";
 import SurveyCreator from "./SurveyCreator";
-import * as widgets from "surveyjs-widgets";
+import { init as inputmask } from "./widgets/inputmask";
+import { init as jqueryuidatepicker } from "./widgets/jquery-ui-datepicker";
 import { initCulture } from "./culture/cultureInit";
 window["$"] = window["jQuery"] = $;
 Survey.StylesManager.applyTheme("default");
-widgets.inputmask(Survey);
-widgets.jqueryuidatepicker(Survey, $);
+inputmask(Survey);
+jqueryuidatepicker(Survey, $);
 initCulture(Survey);
 initCulture(SurveyKo);
 
