@@ -46,16 +46,21 @@ export var cultureInfo = {
       question.survey && this.getSurveyCulture(question.survey) ||
       this.currentCultureValue || this.defaultCultureValue);
   },
+  getQuestionCurrencySymbolLocation: function(question) {
+    return question.getPropertyValue("currencySymbolLocation",
+      this.getCulture(this.getQuestionCulture(question))
+        .currency.symbolLocation);
+  },
   getQuestionDateSeparator: function(question) {
     return question.getPropertyValue("dateSeparator",
       this.getCulture(this.getQuestionCulture(question))
-        .dateSeparators[0]);
+        .date.separators[0]);
   },
   getQuestionShortDateFormat: function(question) {
     var separator = this.getQuestionDateSeparator(question);
     var format = question.getPropertyValue("shortDateFormat",
       this.getCulture(this.getQuestionCulture(question))
-       .shortDateFormats[0].value);
+       .date.shortFormats[0].value);
     return format.replace(/\W/g, separator);
   }
 };

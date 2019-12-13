@@ -3,18 +3,6 @@ import { cultureInfo } from "./cultureInfo";
 
 export function initCulture(Survey) {
     Survey.cultureInfo = cultureInfo;
-    
-    function getQuestionCulture(question) {
-        return question.getPropertyValue("culture",
-            // eslint-disable-next-line
-            question.survey && question.survey.culture || null); 
-    }
-    // function getCultureProperty(question, propertyName) {
-    //     return question.getPropertyValue(propertyName,
-    //         Survey.cultureInfo.getCulture(
-    //             getQuestionCulture(question))[propertyName + "s"][0].value); 
-    // }
-    
     Survey.Serializer.addProperty("survey", {
         name: "culture",
         choices: function(obj) {
@@ -36,10 +24,7 @@ export function initCulture(Survey) {
                 .map((value) => {
                     return {
                         text: (value ? "" : "Default: ") +
-                            Survey.cultureInfo.getCulture(
-                                // eslint-disable-next-line
-                                value ||
-                                // eslint-disable-next-line
+                            Survey.cultureInfo.getCulture(value ||
                                 obj.survey && obj.survey.culture || "").name,
                         value: value
                     };
@@ -48,11 +33,37 @@ export function initCulture(Survey) {
         default: null
     });
     Survey.Serializer.addProperty("text", {
+        name: "currencySymbol",
+        dependsOn: "culture",
+        onGetValue: function(obj) {
+            // return obj.getPropertyValue("currencySymbol",
+            //     Survey.cultureInfo.getCulture(
+            //         Survey.cultureInfo.getQuestionCulture(obj)).currency.symbol);
+            
+            // return obj.getPropertyValue("currencySymbol",
+            return Survey.cultureInfo.getCulture(
+                Survey.cultureInfo.getQuestionCulture(obj)).currency.symbol;
+        },
+        default: null
+    });
+    Survey.Serializer.addProperty("text", {
+        name: "currencySymbolLocation",
+        dependsOn: "culture",
+        choices: function(obj) {
+            return [{
+                text: "Default: " + Survey.cultureInfo.getCulture(
+                    Survey.cultureInfo.getQuestionCulture(obj)).currency.symbolLocation,
+                value: null
+            }, "left", "right", "none"]
+        },
+        default: null
+    });
+    Survey.Serializer.addProperty("text", {
         name: "dateSeparator",
         dependsOn: "culture",
         choices: function(obj) {
             var separators = Survey.cultureInfo.getCulture(
-                getQuestionCulture(obj) || "").dateSeparators;
+                Survey.cultureInfo.getQuestionCulture(obj)).date.separators;
             var defaultSeparator = {
                 text: "Default: " + separators[0],
                 value: null
@@ -66,7 +77,7 @@ export function initCulture(Survey) {
         dependsOn: ["culture", "dateSeparator"],
         choices: function(obj) {
             var formats = Survey.cultureInfo.getCulture(
-                getQuestionCulture(obj) || "").shortDateFormats;
+                Survey.cultureInfo.getQuestionCulture(obj)).date.shortFormats;
             var defaultFormat = {
                 text: "Default: " + formats[0].text,
                 value: null
