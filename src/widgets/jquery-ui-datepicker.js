@@ -161,8 +161,6 @@ export function init(Survey, $) {
   Survey.CustomWidgetCollection.Instance.addCustomWidget(widget, "customtype");
 }
 
-// if (typeof Survey !== "undefined") {
-//   init(Survey, window.$);
-// }
-
-// export default init;
+if (typeof Survey !== "undefined") {
+  init(Survey, window.$);
+}
