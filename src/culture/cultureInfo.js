@@ -1,5 +1,3 @@
-import { enUS_culture } from "./en-US";
-
 export var cultureInfo = {
   currentCultureValue: null,
   defaultCultureValue: "en-US",
@@ -64,5 +62,3 @@ export var cultureInfo = {
     return format.replace(/\W/g, separator);
   }
 };
-
-cultureInfo.cultures["en-US"] = enUS_culture;

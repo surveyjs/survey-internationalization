@@ -3,10 +3,11 @@ import * as SurveyJSCreator from "survey-creator";
 import * as SurveyKo from "survey-knockout";
 import "survey-creator/survey-creator.css";
 import $ from "jquery";
+import { initCulture } from "./culture/cultureInit";
 import { init as inputmask } from "./widgets/inputmask";
 import { init as jqueryuidatepicker } from "./widgets/jquery-ui-datepicker";
-
 SurveyJSCreator.StylesManager.applyTheme("default");
+initCulture(SurveyKo);
 inputmask(SurveyKo);
 jqueryuidatepicker(SurveyKo, $);
 

@@ -1,4 +1,15 @@
+import { dateCultures } from "./jquery-ui-datepicker_culture";
+
 export function init(Survey, $) {
+  for (var culture in dateCultures) {
+    if (typeof Survey.cultureInfo.cultures[culture] === "undefined") {
+      Survey.cultureInfo.cultures[culture] = {};
+    }
+    for (var dateProperty in dateCultures[culture]) {
+      Survey.cultureInfo.cultures[culture][dateProperty] =
+        dateCultures[culture][dateProperty];
+    }
+  }
   $ = $ || window.$;
   if (!$.fn.bootstrapDP && !!$.fn.datepicker && !!$.fn.datepicker.noConflict) {
     $.fn.bootstrapDP = $.fn.datepicker.noConflict();

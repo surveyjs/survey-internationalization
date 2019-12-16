@@ -1,6 +1,16 @@
 import Inputmask from "inputmask";
+import { currencyCultures } from "./inputmask_culture";
 
 export function init(Survey) {
+  for (var culture in currencyCultures) {
+    if (typeof Survey.cultureInfo.cultures[culture] === "undefined") {
+      Survey.cultureInfo.cultures[culture] = {};
+    }
+    for (var currencyProperty in currencyCultures[culture]) {
+      Survey.cultureInfo.cultures[culture][currencyProperty] =
+        currencyCultures[culture][currencyProperty];
+    }
+  }
   var widget = {
     name: "maskedit",
     numericGroupSeparator: ",",

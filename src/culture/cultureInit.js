@@ -1,4 +1,3 @@
-import "./chunks/culture";
 import { cultureInfo } from "./cultureInfo";
 
 export function initCulture(Survey) {
