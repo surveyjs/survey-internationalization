@@ -87,6 +87,6 @@ export function initCulture(Survey) {
     });
 };
 
-if (typeof Survey !== "undefined") {
-    initCulture(Survey);
-}
+// if (typeof Survey !== "undefined") {
+//     initCulture(Survey);
+// }
