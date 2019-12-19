@@ -23,18 +23,6 @@ class App extends Component {
     elements: [
       {
         type: "text",
-        name: "text_date_mask"
-      },
-      {
-        type: "text",
-        name: "text_time_mask"
-      },
-      {
-        type: "text",
-        name: "text_number_mask"
-      },
-      {
-        type: "text",
         name: "text_currency_mask",
         inputMask: "currency"
       },
