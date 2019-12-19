@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "survey-react/survey.css";
 import "./App.css";
 
@@ -52,10 +51,6 @@ class App extends Component {
     var model = new Survey.Model(this.json);
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to SurveyJS Internationalization</h2>
-        </header>
         <div className="surveyjs">
           <h1>SurveyJS Library:</h1>
           <Survey.Survey
