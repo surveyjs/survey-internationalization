@@ -1,5 +1,4 @@
 ## SurveyJS Internationalization
-
 This is project for demonstration of internationalization in SurveyJS
 
 ## How to run this sample application
@@ -18,3 +17,6 @@ This is project for demonstration of internationalization in SurveyJS
 - Set shortDateFormat of text question
 - Use text question with inputType === currency
 - Use datetime picker question
+
+## Video demonstration
+https://youtu.be/27NsI0XB8tk
